@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 
@@ -35,7 +36,6 @@ class Profile(models.Model):
 
     )
 
-    
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to=user_image_path, null=True, blank=True,)
     employee_code = models.CharField(max_length=20, unique=True)
@@ -53,7 +53,9 @@ class Profile(models.Model):
     permanent_address = models.TextField(null=True, blank = True)
     current_address = models.TextField(null=True, blank = True)
     personal_phone_number = models.CharField(max_length=50)
-    altername_phone_number = models.CharField(max_length=50, null=True, blank=True,)
+    alternate_phone_number = models.CharField(max_length=50, null=True, blank=True,)
+    nationality = models.CharField(max_length=50, default="Indian")
+    state = models.CharField(max_length=50, default="Karnataka")
     pan_number = models.CharField(max_length=50, null=True, blank=True,)
     passport_number = models.CharField(max_length=50, null=True, blank=True,)
     father_name = models.CharField(max_length=300, null=True, blank=True,)
@@ -67,7 +69,10 @@ class Profile(models.Model):
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
 
     def get_full_name(self):
-        return self.user.full_name + ' ' + self.user.last_name
+        return self.user.first_name + ' ' + self.user.last_name
+
+    def get_absolute_url(self):
+        return reverse("user_detail", kwargs={"id":self.user.id})
 
     def __str__(self):
         return self.user.username
