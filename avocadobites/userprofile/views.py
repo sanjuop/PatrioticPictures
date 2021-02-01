@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 class UsersList(ListView):
     context_object_name = 'all_users'
     model = Profile
-    paginate_by = 2
+    paginate_by = 10
 
 class UserDetail(DetailView):
     context_object_name = 'user'
@@ -18,7 +18,7 @@ class UserDetail(DetailView):
     template_name = 'userprofile/user_detail.html'
 
     def get_object(self):
-        return get_object_or_404(Profile, id=self.kwargs["id"]-1)
+        return get_object_or_404(Profile, employee_code=self.kwargs["employee_code"])
 
 
 # def userDetail(request, id):

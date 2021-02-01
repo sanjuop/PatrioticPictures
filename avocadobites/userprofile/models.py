@@ -37,7 +37,7 @@ class Profile(models.Model):
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to=user_image_path, null=True, blank=True,)
+    image = models.ImageField(upload_to=user_image_path, default='media/default.png', null=True, blank=True,)
     employee_code = models.CharField(max_length=20, unique=True)
     middle_name = models.CharField(max_length=200, null=True, blank=True,)
     department = models.ForeignKey(Department, default=1, verbose_name='emp_department', on_delete=models.SET_DEFAULT)
@@ -72,13 +72,8 @@ class Profile(models.Model):
         return self.user.first_name + ' ' + self.user.last_name
 
     def get_absolute_url(self):
-        return reverse("user_detail", kwargs={"id":self.user.id})
+        return reverse("user_detail", kwargs={"employee_code":self.employee_code})
 
     def __str__(self):
         return self.user.username
-
-
-
-
-
 

@@ -3,5 +3,8 @@
 		{
 			"path": "."
 		}
-	]
+	],
+	"settings": {
+		"python.pythonPath": "C:\\Users\\Acer\\.conda\\envs\\myDjangoEnv\\python.exe"
+	}
 }

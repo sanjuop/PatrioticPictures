@@ -29,9 +29,9 @@
             {% for users in all_users %}
                 <div class="col-lg-4 mb-4"> 
                     <div class="card" style="width: 18rem;">
-                        {% comment %} <div class="embed-responsive embed-responsive-21by21"> {% endcomment %}
+                        {% if users.image %}
                             <img src="{{users.image.url}}" class="card-img-top" alt="..." height="400" >
-                        {% comment %} </div> {% endcomment %}
+                        {% endif %}
                         <div class="card-body">
                             <h5 class="card-title">{{users.user.username}}</h5>
                             <a href="{{ users.get_absolute_url }}" class="btn btn-primary">View Profile</a>
